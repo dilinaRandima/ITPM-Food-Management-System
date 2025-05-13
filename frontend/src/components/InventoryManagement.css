@@ -2,6 +2,12 @@
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&display=swap');
 @import url('https://fonts.cdnfonts.com/css/canva-sans');
 
+/* Add to the global styles, after the font imports */
+:focus-visible {
+  outline: 3px solid #3182ce;
+  outline-offset: 2px;
+}
+
 .inventory-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -236,8 +242,9 @@
   color: #a4bc5a;
 }
 
+/* Update the following selectors to improve color contrast */
 .stat-card.low-stock .stat-value {
-  color: #dd6b20;
+  color: #c05621; /* Darker orange for better contrast */
 }
 
 .stat-card.out-of-stock .stat-value {
@@ -516,9 +523,10 @@
   background: linear-gradient(45deg, #3182CE, #2B6CB0);
 }
 
+/* Update the following selectors to improve color contrast */
 .grade-badge.grade-c {
-  background: linear-gradient(45deg, #ECC94B, #D69E2E);
-  color: #2D3748;
+  background: linear-gradient(45deg, #D69E2E, #B7791F);
+  color: #ffffff; /* White text for better contrast */
 }
 
 .grade-badge.grade-e {
@@ -853,6 +861,13 @@
   box-shadow: 0 0 0 3px rgba(164, 188, 90, 0.1);
 }
 
+/* Enhance form field focus states after the current focus styles */
+.form-group input:focus-visible,
+.form-group select:focus-visible {
+  outline: 3px solid #3182ce;
+  border-color: #3182ce;
+}
+
 .form-group small {
   font-size: 12px;
   color: #777;
@@ -1127,6 +1142,171 @@ input[type="file"] {
   box-shadow: 0 6px 15px rgba(229, 62, 62, 0.4);
 }
 
+/* Add after the loading indicator styles */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 4px;
+}
+
+.skeleton-text {
+  height: 16px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.skeleton-text.short {
+  width: 60%;
+}
+
+.skeleton-image {
+  height: 50px;
+  width: 50px;
+}
+
+.skeleton-badge {
+  height: 24px;
+  width: 80px;
+  border-radius: 20px;
+}
+
+.skeleton-card {
+  height: 100px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.skeleton-stat {
+  height: 120px;
+  border-radius: 10px;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(164, 188, 90, 0.3);
+  border-radius: 50%;
+  border-top-color: #a4bc5a;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+
+/* Add to the responsive section at the end of the file, before media queries */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  .action-button,
+  .filter-button,
+  .submit-button,
+  .cancel-button,
+  .save-button,
+  .update-button,
+  .delete-button {
+    min-height: 44px;
+    padding: 12px 20px;
+  }
+  
+  .tab-button {
+    padding: 15px 20px;
+  }
+  
+  /* Better spacing between interactive elements */
+  .filter-options {
+    gap: 12px;
+  }
+  
+  /* Custom scrollbar for touch */
+  .inventory-table-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+  
+  /* Slightly increase text size for readability */
+  .form-group label,
+  .inventory-table td,
+  .inventory-table th {
+    font-size: 16px;
+  }
+  
+  /* Bottom floating action button for mobile */
+  .mobile-fab {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #a4bc5a, #8aa548);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .mobile-fab:hover,
+  .mobile-fab:active {
+    transform: scale(1.1);
+    background: linear-gradient(45deg, #8aa548, #768e3d);
+  }
+}
+
+/* Add this additional media query for smaller screens */
+@media (max-width: 576px) {
+  .form-columns {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .inventory-table {
+    font-size: 14px;
+  }
+  
+  .inventory-title {
+    font-size: 2rem;
+  }
+  
+  .inventory-tabs {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .tab-button {
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+}
+
+
 /* Report modal styling */
 .report-modal {
   max-width: 500px;
@@ -1165,9 +1345,9 @@ input[type="file"] {
 }
 
 .generate-button:hover {
-  background: linear-gradient(45deg, #3182ce, #2c5282);
+  background: linear-gradient(45deg, #163d61, #105156);
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(66, 153, 225, 0.4);
+  box-shadow: 0 6px 15px rgba(54, 159, 246, 0.4);
 }
 
 /* NEW - Transaction Styling */
@@ -1192,11 +1372,11 @@ input[type="file"] {
 }
 
 .transaction-card {
-  background: white;
+  background: rgb(71, 33, 33);
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  border: 1px solid #f0f0f0;
+  border: 1px solid #591a1a;
   animation: fadeInUp 0.5s forwards;
   opacity: 0;
   transform: translateY(10px);
